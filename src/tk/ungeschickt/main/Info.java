@@ -36,7 +36,7 @@ public class Info {
         this.websitePassword = websitePassword1;
         this.botToken = botToken1;
         if (botToken1.equals("") || websiteUsername1.equals("") || websitePassword1.equals("")) {
-            throw new RuntimeException("Secrets were empty.");
+            throw new RuntimeException("Secrets were empty. Please write those in secret.txt.\nFirst token. Then WebUsername. And lastly WebPassword.");
         }
     }
 
