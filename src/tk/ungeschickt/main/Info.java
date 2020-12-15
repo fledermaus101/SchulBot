@@ -16,6 +16,11 @@ public class Info {
     private final String websiteUsername;
     private final String websitePassword;
 
+    public boolean isDebug() {
+        return debug;
+    }
+
+    private final boolean debug = true;
 
     public Info(String prefix) throws FileNotFoundException {
         String websiteUsername1 = null;
