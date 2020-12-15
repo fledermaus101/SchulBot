@@ -103,8 +103,7 @@ public class Command_test extends ListenerAdapter {
 
         return null;
     }
-
-    // TODO: Authenticate
+    
     private void authenticate(String cookie) throws IOException, URISyntaxException {
         CookieManager manager = new CookieManager();
         manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
