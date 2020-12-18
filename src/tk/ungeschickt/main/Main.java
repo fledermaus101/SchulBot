@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+// TODO: Embeded Messages
 public class Main extends ListenerAdapter {
     private static JDA jda;
 
