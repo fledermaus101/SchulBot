@@ -1,9 +1,8 @@
-package tk.ungeschickt.commands;
+package tk.ungeschickt.timedEvents;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.Nullable;
 import tk.ungeschickt.main.Info;
+import tk.ungeschickt.main.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,35 +15,28 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Command_test extends ListenerAdapter {
+public class replacementPlanTimer extends TimerTask {
 
     private final Info info;
     private List<HttpCookie> cookies;
 
-    public Command_test(Info info) {
+    public replacementPlanTimer(Info info) {
         this.info = info;
     }
 
     @Override
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        if (!(e.getAuthor().isBot())) {
-            if (e.getMessage().getContentRaw().equalsIgnoreCase(info.getPrefix() + "test")) {
-                e.getMessage().getTextChannel().sendMessage("test!").queue();
-                try {
-                    authenticate(getCookie());
-                    getPDF();
-                } catch (IOException | URISyntaxException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
+    public void run() {
 
-
-        }
     }
+    /* TODO:
+        Do timer
+        Arbeitsplan + Message
 
+     */
     @Nullable
     public String getCookie() throws IOException {
         CookieManager manager = new CookieManager();
@@ -103,7 +95,7 @@ public class Command_test extends ListenerAdapter {
 
         return null;
     }
-    
+
     private void authenticate(String cookie) throws IOException, URISyntaxException {
         CookieManager manager = new CookieManager();
         manager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
