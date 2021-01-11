@@ -2,7 +2,6 @@ package tk.ungeschickt.timedEvents;
 
 import org.jetbrains.annotations.Nullable;
 import tk.ungeschickt.main.Info;
-import tk.ungeschickt.main.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
