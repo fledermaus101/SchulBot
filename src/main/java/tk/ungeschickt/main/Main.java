@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-// TODO: Embeded Messages
+// TODO: Embeded Messages, Log4j or something
 // Credits: the internet
 public class Main {
     public static JDA getJda() {
