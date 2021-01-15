@@ -1,5 +1,6 @@
 package tk.ungeschickt.events;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -8,6 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tk.ungeschickt.main.Info;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ChangeName extends ListenerAdapter {
@@ -45,6 +47,7 @@ public class ChangeName extends ListenerAdapter {
             info.getDebugChannel().sendMessage("Warning in function onGuildMessageReceived in class " + this.getClass().getName() + " e.getMember() returned null!\nReturning from function.").queue();
             return;
         }
+
         if (users.contains(e.getMember().getUser().getId())) {
             TextChannel nameChangeChannel = e.getGuild().getTextChannelById(787711202993242122L);
             if (nameChangeChannel == null) {
@@ -53,9 +56,20 @@ public class ChangeName extends ListenerAdapter {
                 return;
             }
 
+            final String usernamePrefix = "Schüler | ";
+            if (e.getMessage().getContentRaw().length() > 32 - usernamePrefix.length()) {
+                EmbedBuilder builder = new EmbedBuilder();
+
+                builder.setColor(13019674);
+                builder.setDescription("Nickname: " + e.getMessage().getContentRaw() + " ist zu lang!");
+                builder.setFooter("@" + e.getMember().getUser().getAsTag());
+
+                nameChangeChannel.sendMessage(builder.build()).queue();
+            }
+
             e.getGuild().addRoleToMember(e.getMember(), info.getVerified()).queue();
-            nameChangeChannel.sendMessage("Dein name wurde zu Schüler | " + e.getMessage().getContentRaw() + " umbenannt!").queue();
-            member.modifyNickname("Schüler | " + e.getMessage().getContentRaw()).queue();
+            nameChangeChannel.sendMessage("Dein name wurde zu " + usernamePrefix  + e.getMessage().getContentRaw() + " umbenannt!").queue();
+            member.modifyNickname(usernamePrefix + e.getMessage().getContentRaw()).queue();
             users.remove(e.getMember().getUser().getId());
         }
     }
