@@ -73,7 +73,7 @@ public class replacementPlanTimer extends TimerTask {
             if (input == null) {
                 break;
             }
-            // Searching for the form where the cookie lies
+            // Searching for the form where the CSRF token lies
             Pattern pattern = Pattern.compile("<input type=\"hidden\" name=\"([a-z]|[0-9]){32}\" value=\"1\" />", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(input);
             if (matcher.find()) {
@@ -82,7 +82,7 @@ public class replacementPlanTimer extends TimerTask {
                 Pattern pattern2 = Pattern.compile("([a-z]|[0-9]){32}", Pattern.CASE_INSENSITIVE);
                 Matcher matcher2 = pattern2.matcher(matcher.group());
                 if (matcher2.find()) {
-                    // Getting the value idk for what it is used - Current guess a session cookie
+                    // Getting the value CSRF token
                     // But we need it to authenticate
                     if (info.isDebug())
                         System.out.println("Got token: " + matcher2.group());
