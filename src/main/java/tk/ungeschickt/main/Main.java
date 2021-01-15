@@ -60,16 +60,11 @@ public class Main {
     public static String white = (char) 27 + "[97m";
 
     //TODO: OnMemberJoin ask username and change nickname accordingly
-    public static void main(String[] args) throws LoginException, FileNotFoundException, InterruptedException {
-        setInfo(new Info("!"));
-        //Logger.logDebug("test", "Main", "main");
-        String secretEnv = System.getenv("secret");
-        JDABuilder builder;
-        if (secretEnv == null || secretEnv.equals("")) {
-            builder = JDABuilder.createDefault(getInfo().getBotToken());
-        } else {
-            builder = JDABuilder.createDefault(secretEnv);
-        }
+    public static void main(String[] args) throws LoginException, FileNotFoundException, InterruptedException/*, ParseException*/ {
+        setInfo(Info.getInstance());
+        getInfo().setPrefix("!");
+        //Logger logger = new Logger(Main.class.getSimpleName(), new Object() {}.getClass().getEnclosingMethod().getName());
+        JDABuilder builder = JDABuilder.createDefault(getInfo().getBotToken());
         builder.addEventListeners(new Command_test(getInfo()));
         builder.addEventListeners(new ChangeName(getInfo()));
         builder.disableCache(CacheFlag.VOICE_STATE, CacheFlag.MEMBER_OVERRIDES);
