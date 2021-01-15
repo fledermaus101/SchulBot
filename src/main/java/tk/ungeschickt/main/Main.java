@@ -2,16 +2,24 @@ package tk.ungeschickt.main;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import tk.ungeschickt.events.ChangeName;
 import tk.ungeschickt.events.Command_test;
+//import tk.ungeschickt.timedEvents.replacementPlanTimer;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+//import java.text.DateFormat;
+import java.text.ParseException;
+/*import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;*/
 
 // TODO: Embeded Messages, Log4j or something
 // Credits: the internet
@@ -67,7 +75,7 @@ public class Main {
         JDABuilder builder = JDABuilder.createDefault(getInfo().getBotToken());
         builder.addEventListeners(new Command_test(getInfo()));
         builder.addEventListeners(new ChangeName(getInfo()));
-        builder.disableCache(CacheFlag.VOICE_STATE, CacheFlag.MEMBER_OVERRIDES);
+        builder.disableCache(CacheFlag.VOICE_STATE, CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.disableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES, GatewayIntent.GUILD_MESSAGE_TYPING);
         builder.enableIntents(GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS);
         setJda(builder.build());
@@ -75,6 +83,7 @@ public class Main {
         getJda().awaitReady();
         getInfo().setDebugChannel(getJda().getTextChannelById(788525279236194345L));
         getInfo().setVerified(getJda().getRoleById(788520326975062037L));
+        //logger.logDebug("test", "Bot");
 
         /*DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
@@ -108,5 +117,4 @@ public class Main {
             }
         }
     }
-
 }
