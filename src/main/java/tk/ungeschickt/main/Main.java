@@ -78,6 +78,7 @@ public class Main {
         builder.disableCache(CacheFlag.VOICE_STATE, CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.disableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES, GatewayIntent.GUILD_MESSAGE_TYPING);
         builder.enableIntents(GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS);
+        builder.setActivity(Activity.watching("timetable and homework"));
         setJda(builder.build());
 
         getJda().awaitReady();
@@ -94,6 +95,7 @@ public class Main {
         Date date3 = dateFormatter.parse(date0 + " 18:00:00");
 
         Timer timer = new Timer();
+        //           ms   * s  * min* hour
         int period = 1000 * 60 * 60 * 24; //1 day
         timer.schedule(new replacementPlanTimer(info), date1, period);
         timer.schedule(new replacementPlanTimer(info), date2, period);
