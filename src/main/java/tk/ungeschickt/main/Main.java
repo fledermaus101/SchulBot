@@ -7,19 +7,17 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import tk.ungeschickt.events.ChangeName;
 import tk.ungeschickt.events.Command_test;
-//import tk.ungeschickt.timedEvents.replacementPlanTimer;
+import tk.ungeschickt.timedEvents.replacementPlanTimer;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import java.text.DateFormat;
-import java.text.ParseException;
-/*import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;*/
+import java.util.Timer;
+
+//import tk.ungeschickt.timedEvents.replacementPlanTimer;
 
 // TODO: Embeded Messages, Log4j or something
 // Credits: the internet
@@ -86,20 +84,23 @@ public class Main {
         getInfo().setVerified(getJda().getRoleById(788520326975062037L));
         //logger.logDebug("test", "Bot");
 
-        /*DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date0 = dateFormat.format(cal.getTime());
-        Date date1 = dateFormatter.parse(date0 + " 13:00:00");
-        Date date2 = dateFormatter.parse(date0 + " 15:00:00");
-        Date date3 = dateFormatter.parse(date0 + " 18:00:00");
-
+        Calendar date = Calendar.getInstance();
+        date.set(
+                Calendar.DAY_OF_WEEK,
+                Calendar.MONDAY
+        );
+        // 8 14 20
+        date.set(Calendar.HOUR, 8);
+        date.set(Calendar.MINUTE, 0);
+        date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MILLISECOND, 0);
         Timer timer = new Timer();
-        //           ms   * s  * min* hour
-        int period = 1000 * 60 * 60 * 24; //1 day
-        timer.schedule(new replacementPlanTimer(info), date1, period);
-        timer.schedule(new replacementPlanTimer(info), date2, period);
-        timer.schedule(new replacementPlanTimer(info), date3, period);*/
+        int period = 86400000; //1 day
+        timer.schedule(new replacementPlanTimer(info), date.getTime(), period);
+        date.set(Calendar.HOUR, 14);
+        timer.schedule(new replacementPlanTimer(info), date.getTime(), period);
+        date.set(Calendar.HOUR, 20);
+        timer.schedule(new replacementPlanTimer(info), date.getTime(), period);
 
         if (System.in == null)
             return;
