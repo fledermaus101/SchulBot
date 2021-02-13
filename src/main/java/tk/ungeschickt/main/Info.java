@@ -23,7 +23,9 @@ public class Info {
 
     private String prefix;
 
-    public String getBotToken() { return botToken; }
+    public String getBotToken() {
+        return botToken;
+    }
 
     private final String botToken;
     private final String websiteUsername;
@@ -87,9 +89,12 @@ public class Info {
                 JSONObject jsonObject = (JSONObject) obj;
                 logger.trace("Created JSONObject");
 
-                botToken1 = (String) jsonObject.get("botToken");
-                websiteUsername1 = (String) jsonObject.get("webUsername");
-                websitePassword1 = (String) jsonObject.get("webPassword");
+                if (botToken1Empty)
+                    botToken1 = (String) jsonObject.get("botToken");
+                if (webUsername1Empty)
+                    websiteUsername1 = (String) jsonObject.get("webUsername");
+                if (webPassword1Empty)
+                    websitePassword1 = (String) jsonObject.get("webPassword");
             } else
                 throw new FileNotFoundException("secrets.json not found.");
         }
@@ -106,7 +111,9 @@ public class Info {
         logger.trace("Set Instance Info");
     }
 
-    public String getPrefix() { return prefix; }
+    public String getPrefix() {
+        return prefix;
+    }
 
     public String getWebsiteUsername() {
         return websiteUsername;
