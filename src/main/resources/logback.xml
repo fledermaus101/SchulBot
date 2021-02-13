@@ -12,6 +12,10 @@
     </appender>
     <appender name="discordChannel" class="tk.ungeschickt.appender.DiscordChannelAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- NEVER set this to TRACER
+                else it will recursively write messages
+                because the JDA logs when we write a message to discord
+                if it gets logged we will log it to discord -->
             <level>INFO</level>
         </filter>
     </appender>
