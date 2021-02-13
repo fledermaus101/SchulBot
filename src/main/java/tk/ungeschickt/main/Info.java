@@ -91,7 +91,7 @@ public class Info {
                 websiteUsername1 = (String) jsonObject.get("webUsername");
                 websitePassword1 = (String) jsonObject.get("webPassword");
             } else
-                throw new FileNotFoundException("secrets.txt not found.");
+                throw new FileNotFoundException("secrets.json not found.");
         }
         assert botToken1 != null;
         assert websiteUsername1 != null;
