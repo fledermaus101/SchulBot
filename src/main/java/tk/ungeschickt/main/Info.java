@@ -81,29 +81,26 @@ public class Info {
         if (botToken1Empty || webUsername1Empty || webPassword1Empty) {
             File file = new File(String.valueOf(FileSystems.getDefault().getPath("secrets.txt")));
             if (file.exists()) {
-                Scanner scanner = new Scanner(file);
-                if (scanner.hasNextLine())
-                    if (botToken1Empty)
-                        botToken1 = scanner.nextLine();
-                if (scanner.hasNextLine())
-                    if (webUsername1Empty)
-                        websiteUsername1 = scanner.nextLine();
-                if (scanner.hasNextLine())
-                    if (webPassword1Empty)
-                        websitePassword1 = scanner.nextLine();
+                JSONParser jsonParser = new JSONParser();
+                Object obj = jsonParser.parse(new FileReader(file));
+                JSONObject jsonObject = (JSONObject) obj;
+                logger.trace("Created JSONObject");
+
+                botToken1 = (String) jsonObject.get("botToken");
+                websiteUsername1 = (String) jsonObject.get("webUsername");
+                websitePassword1 = (String) jsonObject.get("webPassword");
             } else
                 throw new FileNotFoundException("secrets.txt not found.");
         }
         assert botToken1 != null;
         assert websiteUsername1 != null;
         assert websitePassword1 != null;
-        if (botToken1.equals("") || websiteUsername1.equals("") || websitePassword1.equals("")) {
-            throw new RuntimeException("Secrets were empty. Please write those in secret.txt.\nFirst token. Then WebUsername. And lastly WebPassword.");
-        }
+        if (botToken1.equals("") || websiteUsername1.equals("") || websitePassword1.equals(""))
+            throw new RuntimeException("Secrets are empty. Please write those in secret.json.");
 
+        this.botToken = botToken1;
         this.websiteUsername = websiteUsername1;
         this.websitePassword = websitePassword1;
-        this.botToken = botToken1;
         setInstance(this);
     }
 
