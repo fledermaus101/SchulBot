@@ -13,10 +13,10 @@
         </filter>
     </appender>
 
-    <root level="debug">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
     </root>
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="discordChannel" />
     </root>
 </configuration>
