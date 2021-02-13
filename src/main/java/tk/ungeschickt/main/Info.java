@@ -107,6 +107,7 @@ public class Info {
         this.botToken = botToken1;
         this.websiteUsername = websiteUsername1;
         this.websitePassword = websitePassword1;
+        logger.info("Successfully acquired credentials for the bot!");
         setInstance(this);
         logger.trace("Set Instance Info");
     }

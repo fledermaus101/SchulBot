@@ -73,7 +73,6 @@ public class replacementPlanTimer extends TimerTask {
             if (responseMessage != null && !responseMessage.equals(""))
                 logger.trace("getToken: responseMessage: " + responseMessage);
 
-
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         while (true) {
             String input = in.readLine();
@@ -144,8 +143,8 @@ public class replacementPlanTimer extends TimerTask {
             if (responseMessage != null && !responseMessage.equals(""))
                 logger.trace("authenticate: responseMessage: " + responseMessage);
 
-
         this.cookies = cookies;
+        logger.info("Successfully logged into the website");
     }
 
     private void getPDF() throws IOException, URISyntaxException {
@@ -190,6 +189,7 @@ public class replacementPlanTimer extends TimerTask {
             if (matcher.find()) {
                 if (logger.isDebugEnabled())
                     logger.debug("Found HTML Link to substitution plan document: " + matcher.group());
+                logger.info("Successfully retrieved the substitution plan");
                 break;
             }
         }

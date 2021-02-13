@@ -21,8 +21,8 @@ public class ChangeName extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent e) {
         users.add(e.getMember().getUser().getId());
-        if (logger.isTraceEnabled())
-            logger.trace("Member " + e.getMember().getUser().getId() + " joined.");
+        if (logger.isInfoEnabled())
+            logger.info("Member " + e.getMember().getUser().getId() + " joined.");
         TextChannel nameChangeChannel = e.getGuild().getTextChannelById(787711202993242122L);
         if (nameChangeChannel == null) {
             logger.warn("TextChannel nameChangeChannel is null!");
@@ -52,8 +52,8 @@ public class ChangeName extends ListenerAdapter {
 
             final String usernamePrefix = "Schüler | ";
             if (e.getMessage().getContentRaw().length() > 32 - usernamePrefix.length()) {
-                if (logger.isDebugEnabled())
-                    logger.debug("Member " + member.getUser().getName() + " has chosen a too long name. Printing error.");
+                if (logger.isInfoEnabled())
+                    logger.info("Member " + member.getUser().getName() + " has chosen a too long name. Printing error.");
                 EmbedBuilder builder = new EmbedBuilder();
 
                 builder.setColor(13019674);
@@ -66,8 +66,8 @@ public class ChangeName extends ListenerAdapter {
             e.getGuild().addRoleToMember(member, Objects.requireNonNull(e.getMessage().getGuild().getRoleById(788520326975062037L))).queue();
             nameChangeChannel.sendMessage("Dein name wurde zu " + usernamePrefix  + e.getMessage().getContentRaw() + " umbenannt!").queue();
             member.modifyNickname(usernamePrefix + e.getMessage().getContentRaw()).queue();
-            if (logger.isTraceEnabled())
-                logger.trace("Member " + member.getUser().getName() + " has successfully chose a name.");
+            if (logger.isInfoEnabled())
+                logger.info("Member " + member.getUser().getName() + " has successfully chose a name.");
             users.remove(member.getUser().getId());
         }
     }
