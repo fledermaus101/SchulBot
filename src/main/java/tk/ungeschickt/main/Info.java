@@ -81,7 +81,7 @@ public class Info {
         if (websitePassword1 != null)
             webPassword1Empty = websitePassword1.isEmpty();
         if (botToken1Empty || webUsername1Empty || webPassword1Empty) {
-            logger.trace("Environment vars are empty");
+            logger.trace("Some Environment vars are empty");
             File file = new File(String.valueOf(FileSystems.getDefault().getPath("secrets.json")));
             if (file.exists()) {
                 JSONParser jsonParser = new JSONParser();
